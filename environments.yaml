@@ -1,0 +1,9 @@
+myenv:
+  compiler:
+  - toolchain: gcc
+    spec: gcc
+  specs:
+  - icon4py@icon_20250328
+  unify: true
+  views:
+    default:
