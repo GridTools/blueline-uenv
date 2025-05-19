@@ -26,7 +26,8 @@ class Icon4py(Package):
         uv.add_default_env("UV_NO_CACHE", "true")
         uv.add_default_env("UV_NO_MANAGED_PYTHON", "true")
         uv.add_default_env("UV_PYTHON_DOWNLOADS", "never")
-        python_spec = self.spec["python"]
+        python_spec = spec["python"]
+        print(f"using spack python at: {python_spec.command.path}")
         venv_path = prefix.share.venv
         uv(
             "venv",
@@ -34,7 +35,7 @@ class Icon4py(Package):
             "--system-site-packages",
             str(venv_path),
             "--python",
-            python_spec.prefix.bin.python,
+            python_spec.command.path,
         )
         uv(
             "sync",
