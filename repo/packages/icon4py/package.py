@@ -46,6 +46,8 @@ class Icon4py(Package):
             "--no-install-package",
             "mpi4py",
             "--no-editable",
+            "--python",
+            str(venv_path.bin.python),
             extra_env={"VIRTUAL_ENV": str(venv_path)},
         )
         # uv("run", "--active", "py2fgen", "icon4py.tools.py2fgen.wrappers.all_bindings", "diffusion_init,diffusion_run,grid_init,solve_nh_init,solve_nh_run", "icon4py_bindings", "-o", prefix.src, extra_env={"VIRTUAL_ENV": str(venv_path)})
