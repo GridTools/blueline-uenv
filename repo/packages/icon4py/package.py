@@ -23,10 +23,37 @@ class Icon4py(Package):
 
     def install(self, spec, prefix):
         uv = which("uv")
+        uv.add_default_env("UV_NO_CACHE", "true")
+        uv.add_default_env("UV_NO_MANAGED_PYTHON", "true")
+        uv.add_default_env("UV_PYTHON_DOWNLOADS", "never")
         python_spec = self.spec["python"]
         venv_path = prefix.share.venv
-        uv("venv", "--relocatable", "--system-site-packages", str(venv_path), "--python", python_spec.prefix.bin.python)
-        uv("sync", "--active", "--extra", "fortran", "--inexact", "--no-install-package", "mpi4py", "--no-editable", extra_env={"VIRTUAL_ENV": str(venv_path)})
-        #uv("run", "--active", "py2fgen", "icon4py.tools.py2fgen.wrappers.all_bindings", "diffusion_init,diffusion_run,grid_init,solve_nh_init,solve_nh_run", "icon4py_bindings", "-o", prefix.src, extra_env={"VIRTUAL_ENV": str(venv_path)})
+        uv(
+            "venv",
+            "--relocatable",
+            "--system-site-packages",
+            str(venv_path),
+            "--python",
+            python_spec.prefix.bin.python,
+        )
+        uv(
+            "sync",
+            "--active",
+            "--extra",
+            "fortran",
+            "--inexact",
+            "--no-install-package",
+            "mpi4py",
+            "--no-editable",
+            extra_env={"VIRTUAL_ENV": str(venv_path)},
+        )
+        # uv("run", "--active", "py2fgen", "icon4py.tools.py2fgen.wrappers.all_bindings", "diffusion_init,diffusion_run,grid_init,solve_nh_init,solve_nh_run", "icon4py_bindings", "-o", prefix.src, extra_env={"VIRTUAL_ENV": str(venv_path)})
         py2fgen = Executable(venv_path.bin.py2fgen)
-        py2fgen("icon4py.tools.py2fgen.wrappers.all_bindings", "diffusion_init,diffusion_run,grid_init,solve_nh_init,solve_nh_run", "icon4py_bindings", "-o", prefix.src, extra_env={"VIRTUAL_ENV": str(venv_path)})
+        py2fgen(
+            "icon4py.tools.py2fgen.wrappers.all_bindings",
+            "diffusion_init,diffusion_run,grid_init,solve_nh_init,solve_nh_run",
+            "icon4py_bindings",
+            "-o",
+            prefix.src,
+            extra_env={"VIRTUAL_ENV": str(venv_path)},
+        )
