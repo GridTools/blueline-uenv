@@ -6,9 +6,9 @@ from spack import *
 class Icon4py(Package):
     extends("python")
     depends_on("git")
-    depends_on("boost@1.85:", type="build,run")
-    depends_on("py-mpi4py", type="build,run")
-    depends_on("py-uv@0.7:", type="build")
+    depends_on("boost@1.85:", type=("build", "run"))
+    depends_on("py-mpi4py", type=("build", "run"))
+    depends_on("py-uv@0.7:")
     depends_on("bzip2", type="build")
     # depends_on("py-cupy")
 
