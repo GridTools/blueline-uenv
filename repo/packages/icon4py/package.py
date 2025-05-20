@@ -50,6 +50,12 @@ class Icon4py(Package):
             str(venv_path.bin.python),
             extra_env={"VIRTUAL_ENV": str(venv_path)},
         )
+        # link mpi4py into venv with a .pth
+        pathlib.Path(
+            f"{venv_path.lib.python}{python_spec.version.up_to(2)}/site-packages/mpi4py.pth"
+        ).write_text(
+            f"{spec['py-mpi4py'].prefix.lib.python}{python_spec.version.up_to(2)}/site-packages"
+        )
         # uv("run", "--active", "py2fgen", "icon4py.tools.py2fgen.wrappers.all_bindings", "diffusion_init,diffusion_run,grid_init,solve_nh_init,solve_nh_run", "icon4py_bindings", "-o", prefix.src, extra_env={"VIRTUAL_ENV": str(venv_path)})
         py2fgen = Executable(venv_path.bin.py2fgen)
         py2fgen(
