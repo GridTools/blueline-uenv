@@ -1,9 +1,6 @@
-from __future__ import annotations
-
 import json
 import os
 import pathlib
-from typing import Iterator
 
 import llnl
 from llnl.util import tty
@@ -89,7 +86,7 @@ class Icon4py(Package):
         )
 
 
-def prepare_uv() -> Executable:
+def prepare_uv():
     uv = which("uv")
     uv.add_default_env("UV_NO_CACHE", "true")
     uv.add_default_env("UV_NO_MANAGED_PYTHON", "true")
@@ -97,17 +94,17 @@ def prepare_uv() -> Executable:
     return uv
 
 
-def get_installed_pkg(pip: Executable) -> list[str]:
+def get_installed_pkg(pip):
     return [
         item["name"] for item in json.loads(pip("list", "--format", "json", output=str))
     ]
 
 
-def no_install_options(installed: list[str]) -> Iterator[str]:
+def no_install_options(installed):
     for name in installed:
         yield "--no-install-package"
         yield name
 
 
-def pythonpath_to_pth() -> str:
+def pythonpath_to_pth():
     return "\n".join(os.environ["PYTHONPATH"].split(":"))
