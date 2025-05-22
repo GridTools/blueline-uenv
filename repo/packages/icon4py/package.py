@@ -19,7 +19,6 @@ class Icon4py(Package):
     depends_on("bzip2", type="build")
     depends_on("py-numpy")
     depends_on("py-cffi")
-    depends_on("py-dace")
     depends_on("py-pybind11")
     depends_on("py-nanobind")
     depends_on("py-cupy +cuda", when="+cuda")
