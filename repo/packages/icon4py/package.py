@@ -9,19 +9,23 @@ from spack import *
 
 class Icon4py(Package):
     extends("python")
+    depends_on("python@3.11:")
 
-    variant("cuda", default=False, description="Enable CUDA support")
+    variant("cuda", default=True, description="Enable CUDA support")
+    variant("distributed", default=True, description="Enable multinode support")
 
     depends_on("git")
     depends_on("boost@1.85:", type=("build", "run"))
-    depends_on("py-mpi4py")
     depends_on("py-uv@0.7:")
     depends_on("bzip2", type="build")
     depends_on("py-numpy")
     depends_on("py-cffi")
     depends_on("py-pybind11")
     depends_on("py-nanobind")
+    depends_on("py-mpi4py", when="+distributed")
     depends_on("py-cupy +cuda", when="+cuda")
+    depends_on("ghex +python", when="+distributed")
+    depends_on("ghex +python +cuda", when="+distributed +cuda")
 
     version(
         "icon_20250328",
