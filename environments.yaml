@@ -7,5 +7,9 @@ myenv:
   - py-mpi4py
   - python
   unify: true
+  variants:
+  - +mpi
+  - +cuda
+  - cuda_arch=90
   views:
     default:
