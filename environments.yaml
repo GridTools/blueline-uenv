@@ -3,7 +3,8 @@ myenv:
   - toolchain: gcc
     spec: gcc
   specs:
-  - icon4py@icon_20250328 +distributed +cuda
+  - icon4py@icon_20250328 +distributed
+  - py-cupy
   - py-mpi4py
   - python
   unify: true
