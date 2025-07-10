@@ -35,7 +35,10 @@ class Uv(Package):
         checksums = {
             ("0.7.12", "apple-darwin", "aarch64"): (
                 "189108cd026c25d40fb086eaaf320aac52c3f7aab63e185bac51305a1576fc7e"
-            )
+            ),
+            ("0.7.12", "unknown-linux-gnu", "aarch64"): (
+                "675165f879d6833aa313ecb25ac44781e131933a984727e180b3218d2cd6c1e9"
+            ),
         }
         version = str(self.spec.version)
         arch = translate_arch(self.spec.target)
