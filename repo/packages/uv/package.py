@@ -10,7 +10,7 @@ def translate_platform(platform_name: str) -> str:
 
 
 def translate_arch(arch_name: str) -> str:
-    if arch_name in ["m1", "m2"]:
+    if arch_name in ["m1", "m2", "neoverse_v2"]:
         return "aarch64"
     return arch_name
 
